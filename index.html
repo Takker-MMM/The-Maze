@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="壁を避けてゴールを目指す迷路ゲーム" />
+    <title>迷路探検</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="game-shell">
+      <section class="intro">
+        <p class="eyebrow">MAZE EXPLORER <span>05 STAGES</span></p>
+        <h1>迷路攻略</h1>
+        <p class="lead">なるべく早く、右上のゴールを目指そう。</p>
+        <p class="fullscreen-note">※フルスクリーンで遊ぶことをおすすめします。</p>
+        <div class="legend" aria-label="迷路の記号">
+          <span><i class="legend-dot start-dot"></i>スタート</span>
+          <span><i class="legend-dot goal-dot"></i>ゴール</span>
+          <span><i class="legend-dot wall-dot"></i>壁</span>
+        </div>
+      </section>
+
+      <section class="play-area" aria-label="迷路ゲーム">
+        <div class="game-header">
+          <div>
+            <p class="section-label">CURRENT RUN</p>
+            <p id="status" class="status" aria-live="polite">スタートを押してゲーム開始</p>
+          </div>
+          <div class="stage">
+            <span class="section-label">STAGE</span>
+            <strong id="stage-count">1 / 5</strong>
+          </div>
+          <div class="timer">
+            <span class="section-label">TIME</span>
+            <strong id="timer">0.00</strong>
+          </div>
+        </div>
+
+        <div class="maze-stage">
+          <div id="maze" class="maze is-hidden" role="grid" aria-label="迷路"></div>
+          <div id="maze-overlay" class="maze-overlay">
+            <p id="countdown" class="countdown" aria-live="assertive"></p>
+            <button id="start-button" class="start-button" type="button">スタート</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <p>矢印キー / WASD で移動</p>
+          <div class="d-pad" aria-label="移動ボタン">
+            <button class="control up" data-direction="up" aria-label="上へ">↑</button>
+            <button class="control left" data-direction="left" aria-label="左へ">←</button>
+            <button class="control down" data-direction="down" aria-label="下へ">↓</button>
+            <button class="control right" data-direction="right" aria-label="右へ">→</button>
+          </div>
+          <button id="next-stage-button" class="next-stage-button" type="button" hidden>次のステージに進む</button>
+        </div>
+
+        <section id="survey-panel" class="survey-panel" hidden aria-labelledby="survey-title">
+          <div id="survey-reference" class="survey-reference" hidden aria-label="5つの迷路"></div>
+          <div id="survey-maze" class="survey-maze" aria-label="評価対象の迷路"></div>
+          <div class="survey-copy">
+            <p class="section-label">MAZE SURVEY</p>
+            <h2 id="survey-title">迷路について教えてください</h2>
+            <p id="survey-progress" class="survey-progress"></p>
+            <form id="survey-form">
+              <div id="survey-questions"></div>
+              <button id="survey-next-button" class="next-stage-button" type="submit">次の迷路を評価</button>
+            </form>
+          </div>
+        </section>
+
+        <section id="log-panel" class="log-panel" hidden aria-labelledby="log-title">
+          <p class="section-label">RUN LOG</p>
+          <p class="log-instruction">以下のログデータをすべてコピーし、フォームに入力してください</p>
+          <button id="copy-log-button" class="copy-log-button" type="button">ログデータをコピー</button>
+          <p id="copy-log-status" class="copy-log-status" aria-live="polite"></p>
+          <h2 id="log-title">全ステージの記録</h2>
+          <ol id="log-list" class="log-list"></ol>
+        </section>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
