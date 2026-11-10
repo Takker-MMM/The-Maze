@@ -484,6 +484,7 @@ function nextStage() {
 document.addEventListener("keydown", (event) => {
   const keys = { ArrowUp: "up", w: "up", W: "up", ArrowDown: "down", s: "down", S: "down", ArrowLeft: "left", a: "left", A: "left", ArrowRight: "right", d: "right", D: "right" };
   const direction = keys[event.key];
+  if (event.target instanceof HTMLTextAreaElement) return;
   if (direction) {
     event.preventDefault();
     move(direction);
