@@ -270,11 +270,10 @@ function finishSurvey(event) {
   }
 
   const mazeName = `迷路${stageOrder[surveyIndex] + 1}`;
-  const ratings = surveyQuestionsData.map(({ key }) => {
+  surveyQuestionsData.forEach(({ key }) => {
     const selected = surveyForm.querySelector(`input[name="${key}"]:checked`);
-    return `${key} ${selected.value}点`;
+    addLog(`${mazeName}の${key}：${selected.value}点`);
   });
-  addLog(`${mazeName}の評価：${ratings.join(" / ")}`);
 
   surveyIndex += 1;
   if (surveyIndex === mazeLayouts.length) {
